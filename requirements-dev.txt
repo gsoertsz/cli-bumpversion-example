@@ -1,0 +1,10 @@
+pytest
+pylint
+mock
+coverage
+build
+pytest-cov
+click
+flake8
+wheel
+artifacts-keyring

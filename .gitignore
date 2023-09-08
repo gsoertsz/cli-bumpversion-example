@@ -1,0 +1,7 @@
+*.pyc
+dist
+unittest_output.xml
+*report.txt
+*.egg-info
+.coverage
+.vscode

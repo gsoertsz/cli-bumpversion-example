@@ -1,0 +1,142 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+env:
+  AZURE_DEVOPS_ORGURL: "${{ secrets.AZURE_DEVOPS_ORGURL }}"
+  AZURE_ARTIFACTS_FEED_URL: "${{ secrets.AZURE_ARTIFACTS_FEED_URL }}/cli-bumpversion-example-release/pypi/upload/"
+  ARTIFACTS_KEYRING_NONINTERACTIVE_MODE: true
+  NETRC: './.netrc'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v3
+      - name: Create .netrc file
+        uses: 1arp/create-a-file-action@0.2
+        with:
+          path: '.'
+          file: .netrc
+          content: |
+            machine pkgs.dev.azure.com
+            login ${{ secrets.AZURE_ARTIFACTS_USERNAME }}
+            password ${{ secrets.AZURE_ARTIFACTS_PAT }}
+
+      - name: Create .pypirc file
+        uses: 1arp/create-a-file-action@0.2
+        with:
+          path: '.'
+          file: .pypirc
+          content: |
+            [distutils]
+            Index-servers =
+                cli-bumpversion-example-release
+            
+            [cli-bumpversion-example-release]
+            Repository = "${{ env.AZURE_ARTIFACTS_FEED_URL }}"
+      - name: Install dev dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+      - name: Install Dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Lint
+        run: |
+          make lint
+      - name: Test
+        run: |
+          make test
+      - name: Build package
+        run: |
+          make build
+
+  bump-and-tag-version:
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Bump version and push tag
+        uses: jasonamyers/github-bumpversion-action@v1.0.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate access token
+        uses: tibdex/github-app-token@v1
+        id: get_installation_token
+        with:
+          app_id: ${{ env.VERSIONBUMP_APP_ID }}
+          private_key: ${{ secrets.VERSION_BUMP_TOKEN_PRIVATE_KEY }}
+      - name: "Push changes"
+        env:
+          GITHUB_TOKEN: ${{ steps.get_installation_token.outputs.token }}
+        run: |
+          git config --get http.${{ github.server_url }}/.extraheader && git config --unset-all http.${{ github.server_url }}/.extraheader
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git config credential.${{ github.server_url }}.helper '!f() { test "$1" = get && echo "password=$GITHUB_TOKEN"; }; f'
+          git config credential.${{ github.server_url }}.username x-access-token
+          echo "Add here your changes and a git commit if needed"
+          git push origin ${{ github.ref }} --force-with-lease --tags
+      - name: Setup Python
+        uses: actions/setup-python@v3
+      - name: Create .netrc file
+        uses: 1arp/create-a-file-action@0.2
+        with:
+          path: '.'
+          file: .netrc
+          content: |
+            machine pkgs.dev.azure.com
+            login svc-cfs-fwp-infra-ci
+            password ${{ secrets.AZURE_ARTIFACTS_PAT }}
+      - name: Create .pypirc file
+        uses: 1arp/create-a-file-action@0.2
+        with:
+          path: '.'
+          file: .pypirc
+          content: |
+            [distutils]
+            Index-servers =
+                cli-bumpversion-example-release
+            
+            [cli-bumpversion-example-release]
+            Repository = "${{ env.AZURE_ARTIFACTS_FEED_URL }}"
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Build package
+        run: |
+          make build
+      - name: Install publishing dependencies
+        run: |
+          pip install twine
+      - name: Publish distribution Azure Artifacts
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.AZURE_ARTIFACTS_PAT }}
+          repository_url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
+          user: ${{ secrets.AZURE_ARTIFACTS_USERNAME }}
+          verbose: true
+        
+
+

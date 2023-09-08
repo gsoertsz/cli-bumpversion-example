@@ -105,7 +105,7 @@ jobs:
           file: .netrc
           content: |
             machine pkgs.dev.azure.com
-            login svc-cfs-fwp-infra-ci
+            login ${{ secrets.AZURE_ARTIFACTS_USERNAME }}
             password ${{ secrets.AZURE_ARTIFACTS_PAT }}
       - name: Create .pypirc file
         uses: 1arp/create-a-file-action@0.2
@@ -137,6 +137,7 @@ jobs:
           repository-url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
           user: ${{ secrets.AZURE_ARTIFACTS_USERNAME }}
           verbose: true
-        
+      - name: Create release
+        uses: ncipollo/release-action@v1
 
 

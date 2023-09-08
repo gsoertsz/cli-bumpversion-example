@@ -137,7 +137,5 @@ jobs:
           repository-url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
           user: ${{ secrets.AZURE_ARTIFACTS_USERNAME }}
           verbose: true
-      - name: Create release
-        uses: ncipollo/release-action@v1
 
 

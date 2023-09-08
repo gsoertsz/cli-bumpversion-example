@@ -15,8 +15,8 @@ permissions:
   contents: write
 
 env:
-  AZURE_DEVOPS_ORGURL: "${{ secrets.AZURE_DEVOPS_ORGURL }}"
-  AZURE_ARTIFACTS_FEED_URL: "${{ secrets.AZURE_ARTIFACTS_FEED_URL }}/cli-bumpversion-example-release/pypi/upload/"
+  AZURE_DEVOPS_ORGURL: "${{ vars.AZURE_DEVOPS_ORGURL }}"
+  AZURE_ARTIFACTS_FEED_URL: "${{ vars.AZURE_ARTIFACTS_FEED_URL }}/cli-bumpversion-example-release/pypi/upload/"
   ARTIFACTS_KEYRING_NONINTERACTIVE_MODE: true
   NETRC: './.netrc'
 

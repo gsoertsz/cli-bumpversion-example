@@ -134,7 +134,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.AZURE_ARTIFACTS_PAT }}
-          repository_url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
+          repository-url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
           user: ${{ secrets.AZURE_ARTIFACTS_USERNAME }}
           verbose: true
         

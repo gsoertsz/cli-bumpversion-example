@@ -1,5 +1,5 @@
-## v0.1.5 (2023-09-09)
+## v0.1.6 (2023-09-09)
 
 ### Fix
 
-- **files**: removed changelog
+- **changelog**: adding workaround to delete changelog to allow it to be reproduced

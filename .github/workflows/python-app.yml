@@ -75,10 +75,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Bump version and push tag
-        uses: jasonamyers/github-bumpversion-action@v1.0.5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - id: cz
+        name: Create bump and changelog
+        uses: commitizen-tools/commitizen-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Generate access token
         uses: tibdex/github-app-token@v1
         id: get_installation_token

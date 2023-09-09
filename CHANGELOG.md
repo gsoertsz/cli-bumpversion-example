@@ -1,5 +1,5 @@
-## v0.1.6 (2023-09-09)
+## v0.2.0 (2023-09-09)
 
-### Fix
+### Feat
 
-- **changelog**: adding workaround to delete changelog to allow it to be reproduced
+- **doco**: removed whitespace

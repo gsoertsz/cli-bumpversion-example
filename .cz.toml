@@ -5,7 +5,7 @@ version_scheme = "semver"
 version = "0.1.4"
 annotated_tag = true
 update_changelog_on_bump = true
-changelog_incremental = true
+changelog_incremental = false
 bump_message = "release $current_version → $new_version [no-ci]"
 version_files = [
     "setup.py"

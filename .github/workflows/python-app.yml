@@ -81,7 +81,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           debug: true
-          changelog: false
+          changelog: true
       - name: Generate access token
         uses: tibdex/github-app-token@v1
         id: get_installation_token

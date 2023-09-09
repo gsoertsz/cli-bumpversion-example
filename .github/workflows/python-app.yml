@@ -80,6 +80,7 @@ jobs:
         uses: commitizen-tools/commitizen-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          debug: true
       - name: Generate access token
         uses: tibdex/github-app-token@v1
         id: get_installation_token

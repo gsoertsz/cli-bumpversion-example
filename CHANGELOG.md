@@ -1,3 +1,10 @@
+## v0.4.2 (2023-09-10)
+
+### Fix
+
+- **chore**: test whitespace addition
+- **chore**: test whitespace removal
+
 ## v0.4.1 (2023-09-09)
 
 ### Fix

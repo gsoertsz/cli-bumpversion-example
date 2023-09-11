@@ -1,5 +1,5 @@
 
-.PHONY: install test lint clean build all
+.PHONY: install test lint clean build docs all
 .ONESHELL:
 
 install:
@@ -16,8 +16,15 @@ lint:
 lint-hard:
 	flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
+docs:
+	sphinx-apidoc --ext-autodoc -f -o docs/source hello "tests"
+	sphinx-build -M html docs/source docs/build
+
+docs-clean:
+	rm -rf docs/build/*
+
 COVLINT_FILES = cov.xml coverage.xml pytest-report.xml pylint-report.txt htmlcov unittest*.xml
-clean:
+clean: docs-clean
 	rm -rf $(COVLINT_FILES) 
 	rm -rf *.egg-info
 	rm -rf .coverage
@@ -29,4 +36,4 @@ clean:
 build:
 	python -m build --sdist
 
-all: clean test lint install build
+all: clean test lint install build docs

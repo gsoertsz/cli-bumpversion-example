@@ -1,3 +1,7 @@
+"""
+The Hello Package
+"""
+
 from datetime import datetime
 from pydoc import describe
 import click

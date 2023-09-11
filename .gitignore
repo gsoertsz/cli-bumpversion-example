@@ -5,3 +5,4 @@ unittest_output.xml
 *.egg-info
 .coverage
 .vscode
+docs/build/*

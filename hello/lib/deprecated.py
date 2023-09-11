@@ -3,6 +3,7 @@ This module holds wrappers and utils related to deprecation
 """
 
 from functools import wraps
+from hello import logger
 
 def deprecated(func):
     """ indicated the wrapped function is deprecated """

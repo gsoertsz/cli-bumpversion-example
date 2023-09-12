@@ -34,6 +34,6 @@ clean: docs-clean
 	find . -name '__pycache__' -delete
 
 build:
-	python -m build --sdist
+	python -m build
 
 all: clean test lint install build docs

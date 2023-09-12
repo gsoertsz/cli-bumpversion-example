@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cli-bumpversion-example"
+version = "0.6.0"
+authors = [
+]
+description = "Example CLI"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.9.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: LGPL License",
+    "Operating System :: OS Independent",
+]
+dependencies = ["click"]
+
+[project.urls]
+"Homepage" = "https://github.com/gsoertsz/cli-bumpversion-example/"
+"Bug Tracker" = "https://github.com/gsoertsz/cli-bumpversion-example/issues"
+
+[tool.setuptools.packages.find]
+# list of folders that contain the packages (["."] by default)
+include = [ "hello" ]
+
+[project.scripts]
+hello = "hello.hello:main"

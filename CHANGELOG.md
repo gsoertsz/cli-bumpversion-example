@@ -1,3 +1,10 @@
+## 0.6.2 (2023-09-12)
+
+### Fix
+
+- **package**: updated package includes and build (#6)
+- **manifest**: removed unnecessary file (#5)
+
 ## 0.6.1 (2023-09-12)
 
 ### Fix

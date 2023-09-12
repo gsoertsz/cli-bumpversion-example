@@ -22,9 +22,13 @@ dependencies = ["click"]
 "Homepage" = "https://github.com/gsoertsz/cli-bumpversion-example/"
 "Bug Tracker" = "https://github.com/gsoertsz/cli-bumpversion-example/issues"
 
+[tool.setuptools]
+include-package-data = false
+
 [tool.setuptools.packages.find]
 # list of folders that contain the packages (["."] by default)
-include = [ "hello" ]
+include = [ "hello", "hello.greeting", "hello.lib" ]
+exclude = [ "hello.tests*" ]
 
 [project.scripts]
 hello = "hello.hello:main"

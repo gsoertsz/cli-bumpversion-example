@@ -1,5 +1,4 @@
 include requirements.txt 
-include host.json
 exclude *.egg-info
 
 graft hello

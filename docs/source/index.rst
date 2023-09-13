@@ -12,9 +12,6 @@ Welcome to cli-bumpversion-example's documentation!
 
    modules
 
-
-
-
 Indices and tables
 ==================
 
@@ -22,6 +19,10 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+README
+======
+
+* :ref:`readme`
 
 Test Results
 ============

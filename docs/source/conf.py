@@ -24,15 +24,25 @@ copyright = '2023, Greg Soertsz'
 author = 'Greg Soertsz'
 
 
+on_rtd = os.environ.get('READTHEDOCS') == 'True'
+if on_rtd:
+    plantuml = 'java -Djava.awt.headless=true -jar /usr/share/plantuml/plantuml.jar'
+else:
+    plantuml = 'java -jar %s' % os.path.join(os.path.dirname(__file__), "utils", "plantuml.jar")
+
+    plantuml_output_format = 'png'
+
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx_needs',
     'sphinx.ext.napoleon',
     'sphinx.ext.autodoc',
+    'sphinxcontrib.plantuml',
+    'sphinx_mdinclude',
+    'sphinx_needs',
     'sphinxcontrib.test_reports'
 ]
 

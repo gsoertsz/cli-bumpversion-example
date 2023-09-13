@@ -27,5 +27,4 @@ README
 Test Results
 ============
 
-
-   test-results:: ../../unittest_output.xml
+.. test-results:: ../../unittest_output.xml

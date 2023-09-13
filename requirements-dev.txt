@@ -9,5 +9,8 @@ flake8
 wheel
 artifacts-keyring
 sphinx
+sphinx-needs
 sphinx-rtd-theme
 sphinx-mdinclude
+sphinx-test-reports
+sphinxcontrib-plantuml

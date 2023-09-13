@@ -12,6 +12,7 @@ Welcome to cli-bumpversion-example's documentation!
 
    modules
 
+.. mdinclude:: ../../README.md
 
 
 
@@ -26,4 +27,5 @@ Indices and tables
 Test Results
 ============
 
-.. test-results:: ../../unittest_output.xml
+
+   test-results:: ../../unittest_output.xml

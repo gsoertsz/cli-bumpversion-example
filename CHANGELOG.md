@@ -1,3 +1,9 @@
+## 0.7.0 (2023-09-13)
+
+### Feat
+
+- **doco**: added rST plugins for test reports and readme includes (#7)
+
 ## 0.6.2 (2023-09-12)
 
 ### Fix

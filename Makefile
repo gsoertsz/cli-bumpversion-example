@@ -36,4 +36,4 @@ clean: docs-clean
 build:
 	python -m build
 
-all: clean test lint install build docs
+all: clean install test lint build docs

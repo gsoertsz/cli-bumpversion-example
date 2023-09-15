@@ -8,20 +8,27 @@ trigger:
     include:
       - 'main'
 
-pool:
-  vmImage: ubuntu-latest
+stages:
+  - stage: Download_Dependency
+    displayName: Download Dependency
+    jobs:
+      - deployment: Prepare_Env
+        pool:
+          vmImage: ubuntu-latest
+        environment: dev
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: |
+                    pip install --upgrade pip
+                    pip install artifacts-keyring
 
-steps:
-- script: |
-   pip install --upgrade pip
-   pip install artifacts-keyring
+                - task: PipAuthenticate@1
+                  inputs:
+                    artifactFeeds: $(AZURE_DEVOPS_ARTIFACT_FEED_PATH)
+                - script: |
+                    pip install -vvv hello --index-url $(PIP_INDEX_URL)
 
-- task: PipAuthenticate@1
-  inputs:
-    artifactFeeds: $(AZURE_DEVOPS_ARTIFACT_FEED_PATH)
-
-- script: |
-    pip install -vvv hello --index-url $(PIP_INDEX_URL)
-
-- script: |
-   hello --help
+                - script: |
+                    hello --help

@@ -1,3 +1,9 @@
+## 0.10.2 (2023-09-15)
+
+### Fix
+
+- **deployment**: add support for installing specified version (#15)
+
 ## 0.10.1 (2023-09-15)
 
 ### Fix

@@ -2,26 +2,35 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+trigger: none
+pr: none
 
-trigger:
-  branches:
-    include:
-      - 'main'
+parameters:
+- name: feed
+  displayName: The artefact feed (project/feedname only)
+  type: string
 
-pool:
-  vmImage: ubuntu-latest
+stages:
+  - stage: Download_Dependency
+    displayName: Download Dependency
+    jobs:
+      - deployment: Download_And_Execute_CLI
+        pool:
+          vmImage: ubuntu-latest
+        environment: dev
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: UsePythonVersion@0
+                  inputs:
+                    versionSpec: '3.9'
 
-steps:
-- script: |
-   pip install --upgrade pip
-   pip install artifacts-keyring
+                - task: PipAuthenticate@1
+                  inputs:
+                    artifactFeeds: ${{ parameters.feed }}
+                - script: |
+                    pip install -vvv cli-bumpversion-example --index-url $(PIP_INDEX_URL)
 
-- task: PipAuthenticate@1
-  inputs:
-    artifactFeeds: $(AZURE_DEVOPS_ARTIFACT_FEED_PATH)
-
-- script: |
-    pip install -vvv hello --index-url $(PIP_INDEX_URL)
-
-- script: |
-   hello --help
+                - script: |
+                    hello --help

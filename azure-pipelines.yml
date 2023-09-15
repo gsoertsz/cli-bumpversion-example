@@ -43,6 +43,7 @@ stages:
                 - task: CmdLine@2
                   displayName: Install latest version
                   condition: ne(parameters.version, '')
+                  script: |
                     pip install -vvv cli-bumpversion-example --index-url $(PIP_INDEX_URL)
 
                 - script: |

@@ -9,6 +9,10 @@ parameters:
 - name: feed
   displayName: The artefact feed (project/feedname only)
   type: string
+- name: version
+  displayName: The version we want
+  type: string
+  default: ''
 
 stages:
   - stage: Download_Dependency
@@ -29,7 +33,16 @@ stages:
                 - task: PipAuthenticate@1
                   inputs:
                     artifactFeeds: ${{ parameters.feed }}
-                - script: |
+
+                - task: CmdLine@2
+                  displayName: Install specified version
+                  condition: ne(parameters.version, '')
+                  script: |
+                    pip install -vvv cli-bumpversion-example==${{ parameters.version }} --index-url $(PIP_INDEX_URL)
+
+                - task: CmdLine@2
+                  displayName: Install latest version
+                  condition: ne(parameters.version, '')
                     pip install -vvv cli-bumpversion-example --index-url $(PIP_INDEX_URL)
 
                 - script: |

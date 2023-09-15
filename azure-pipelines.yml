@@ -36,7 +36,7 @@ stages:
 
                 - task: CmdLine@2
                   displayName: Install specified version
-                  condition: ne('${{ parameters.version }}'', '')
+                  condition: eq('${{ parameters.version }}'', '')
                   inputs:
                     script: |
                       pip install -vvv cli-bumpversion-example==${{ parameters.version }} --index-url $(PIP_INDEX_URL)

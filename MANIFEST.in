@@ -2,3 +2,4 @@ include requirements.txt
 exclude *.egg-info
 
 graft hello
+graft docs/build/html

@@ -8,7 +8,7 @@ stages:
   - stage: Download_Dependency
     displayName: Download Dependency
     jobs:
-      - deployment: Prepare_Env
+      - deployment: Download_And_Execute_CLI
         pool:
           vmImage: ubuntu-latest
         environment: dev

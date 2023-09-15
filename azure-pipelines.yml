@@ -19,13 +19,15 @@ stages:
                 - task: UsePythonVersion@0
                   inputs:
                     versionSpec: '3.9'
+
                 - script: |
                     pip install --upgrade pip
                     pip install artifacts-keyring
 
                 - task: PipAuthenticate@1
                   inputs:
-                    artifactFeeds: $(AZURE_DEVOPS_ARTIFACT_FEED_PATH)
+                    artifactFeeds: gsoertsz/cli-bumpversion-example-release
+
                 - script: |
                     pip install -vvv hello --index-url $(PIP_INDEX_URL)
 

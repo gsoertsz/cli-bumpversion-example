@@ -29,7 +29,7 @@ stages:
                     artifactFeeds: gsoertsz/cli-bumpversion-example-release
 
                 - script: |
-                    pip install -vvv hello --index-url $(PIP_INDEX_URL)
+                    pip install -vvv cli-bumpversion-example --index-url $(PIP_INDEX_URL)
 
                 - script: |
                     hello --help

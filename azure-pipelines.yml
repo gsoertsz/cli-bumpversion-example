@@ -20,10 +20,6 @@ stages:
                   inputs:
                     versionSpec: '3.9'
 
-                # - script: |
-                #     pip install --upgrade pip
-                #     pip install artifacts-keyring
-
                 - task: PipAuthenticate@1
                   inputs:
                     artifactFeeds: gsoertsz/cli-bumpversion-example-release

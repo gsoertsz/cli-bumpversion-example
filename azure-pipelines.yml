@@ -28,7 +28,7 @@ stages:
 
                 - task: PipAuthenticate@1
                   inputs:
-                    artifactFeeds: ${{ feed }}
+                    artifactFeeds: ${{ parameters.feed }}
                 - script: |
                     pip install -vvv cli-bumpversion-example --index-url $(PIP_INDEX_URL)
 

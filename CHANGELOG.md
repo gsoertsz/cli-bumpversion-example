@@ -1,3 +1,9 @@
+## 0.9.2 (2023-09-15)
+
+### Fix
+
+- **release**: add tests to release
+
 ## 0.9.1 (2023-09-15)
 
 ### Fix

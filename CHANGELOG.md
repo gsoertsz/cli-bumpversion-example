@@ -1,3 +1,9 @@
+## 0.10.1 (2023-09-15)
+
+### Fix
+
+- **deployment**: rewire deployment pipeline (#14)
+
 ## 0.10.0 (2023-09-15)
 
 ### Feat

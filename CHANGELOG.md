@@ -1,3 +1,9 @@
+## 0.10.0 (2023-09-15)
+
+### Feat
+
+- **docs**: update workflow and manifest to include generated doco (#13)
+
 ## 0.9.2 (2023-09-15)
 
 ### Fix

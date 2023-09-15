@@ -1,7 +1,7 @@
 [tool.commitizen]
 name = "cz_conventional_commits"
 version_scheme = "semver"
-version = "0.9.2"
+version = "0.10.0"
 annotated_tag = true
 update_changelog_on_bump = true
 changelog_incremental = true
